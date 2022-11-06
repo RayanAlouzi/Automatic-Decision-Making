@@ -28,15 +28,20 @@ def signup(conn):
 
         name = input("Input your name: ")
         while(name == ""):
+            name = input("Input your name: ")
+        
+        while age == "":
+            age = input("Input your age: ") 
             try: 
-                name = int(name)
-                name = ""
-                print("Username cannot be just numbers")
-            except Exception as e: 
-                print(e)
-                # valid username
-                
-
+                age = int(age)  # try turning age into an integer
+            except:
+                print("Invalid Entry, try again")
+                age = ""
+                continue  # avoid using int(age) and get error later
+            if int(age) < 0 or int(age) > 120:
+                print("Invalid age, try again")
+                age = ""
+        
         # checks whatever can make it invalid
         if len(uid) > 15:  # username is too long
             print("Username is too long")
@@ -45,7 +50,7 @@ def signup(conn):
             print("Username is too short")
             uid = ""
         elif row != None:  # username exists in database
-            print("Username is not unique, try again")
+            print("Invalid username, try again")
             uid = ""
         elif len(password) < 5:  # password too short
             print("Password is too short, try again")
@@ -55,6 +60,6 @@ def signup(conn):
             print("Weak password, try again")
             password,uid,confirmPassword = "", "",""
 
-    c.execute('''INSERT INTO users VALUES (?,?,?,?)''')
+    # c.execute('''INSERT INTO users VALUES (?,?,?,?);''', (uid,password,name,age))
 
 signup(conn)
