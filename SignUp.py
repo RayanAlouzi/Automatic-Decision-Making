@@ -5,13 +5,15 @@ import sqlite3
 conn = sqlite3.connect("./mainData.db")
 def signup(conn):
     c = conn.cursor()  # create cursor to connect to database
+    c.execute(' PRAGMA foreign_keys=ON; ')
+    c.commit()
     uid,password, confirmPassword, name, age = "","","","",""  # initiate all the variables
 
 
     while uid == "" or password != confirmPassword or password == "": 
-        uid = input("Input your username: ")
+        uid = input("Input your username: ").lower() 
         while uid == "":
-            uid = input("Input your username: ")
+            uid = input("Input your username: ").lower()
         # to check if uid in database
         c.execute('''
             SELECT u.uid
