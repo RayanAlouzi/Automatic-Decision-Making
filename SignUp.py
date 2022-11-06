@@ -38,28 +38,31 @@ def signup(conn):
                 print("Invalid Entry, try again")
                 age = ""
                 continue  # avoid using int(age) and get error later
-            if int(age) < 0 or int(age) > 120:
+            if age < 0 or age > 120:
                 print("Invalid age, try again")
                 age = ""
         
         # checks whatever can make it invalid
         if len(uid) > 15:  # username is too long
             print("Username is too long")
-            uid = ""
-        if len(uid) < 4:  # username is too short
+            password,uid,confirmPassword,age = "", "","", ""
+        elif len(uid) < 4:  # username is too short
             print("Username is too short")
-            uid = ""
+            password,uid,confirmPassword,age = "", "","", ""
         elif row != None:  # username exists in database
             print("Invalid username, try again")
-            uid = ""
+            password,uid,confirmPassword,age = "", "","", ""
         elif len(password) < 5:  # password too short
             print("Password is too short, try again")
+            password,uid,confirmPassword,age = "", "","", ""
         elif password != confirmPassword:  # password and confirmPass don't match
             print("Passwords do not match, try again.")
+            password,uid,confirmPassword,age = "", "","", "" 
         elif uid.lower() in password.lower():  # username inside password
             print("Weak password, try again")
-            password,uid,confirmPassword = "", "",""
+            password,uid,confirmPassword,age = "", "","", ""
 
-    # c.execute('''INSERT INTO users VALUES (?,?,?,?);''', (uid,password,name,age))
-
+    c.execute('''INSERT INTO users VALUES (?,?,?,?);''', (uid,password,name,age))
+    conn.commit()
+    conn.close()
 signup(conn)
