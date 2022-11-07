@@ -3,7 +3,7 @@ import pwinput
 import sqlite3
 
 conn = sqlite3.connect("./mainData.db")
-def signup(conn):
+def signup(conn):  # returns uid of user who signed up
     c = conn.cursor()  # create cursor to connect to database
     c.execute(' PRAGMA foreign_keys=ON; ')
     c.commit()
@@ -66,5 +66,5 @@ def signup(conn):
 
     c.execute('''INSERT INTO users VALUES (?,?,?,?);''', (uid,password,name,age))
     conn.commit()
-    conn.close()
+    return uid 
 signup(conn)
