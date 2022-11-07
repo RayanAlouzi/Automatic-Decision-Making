@@ -31,5 +31,3 @@ def login(conn): # returns userID and artistID, at least one is not None
             if userID == None:
                 print("Not a valid username or password")
     return userID  # if both are none then user is backing out
-
-login(conn)
