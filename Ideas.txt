@@ -1,0 +1,4 @@
+1. user can make decisions on something made up in the moment (take input to decide between inputted things, randomize giving answer)
+2. record most recent decisions made by user 
+3. decide random anime or show to watch
+4. have user record what theyve watched and give rating 
